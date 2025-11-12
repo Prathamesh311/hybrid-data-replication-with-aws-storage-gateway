@@ -7,9 +7,24 @@ It automatically syncs files created in a local NFS mount to an Amazon S3 bucket
 
 ## 🚀 Project Overview
 
-AWS **Storage Gateway** enables hybrid cloud storage by connecting on-premises applications to AWS Cloud storage.  
-In this project, we configure **File Gateway** to replicate files from a local Linux instance to an S3 bucket.
+The **Hybrid Data Replication using AWS Storage Gateway** project demonstrates how to connect on-premises infrastructure with **AWS Cloud storage** to achieve seamless, secure, and automatic data synchronization.
 
+In this project, we use the **AWS Storage Gateway (File Gateway)** service to bridge on-premises storage (simulated using an EC2 instance) and **Amazon S3**.  
+Any file created or modified in the local NFS mount directory is automatically replicated to the connected **S3 bucket**, ensuring **data durability, accessibility, and backup consistency**.
+
+This hybrid architecture allows organizations to:
+- Maintain **local access speed** for frequently used data (via gateway caching)
+- Benefit from **AWS scalability and redundancy**
+- Simplify **backup, restore, and archival** operations
+- Minimize the need for complex manual synchronization or data transfer jobs
+
+### 🔑 Key Features
+- **Hybrid Cloud Integration:** Seamlessly connects on-premises workloads to AWS S3.  
+- **Automatic Data Replication:** Any local file changes are synced to the cloud in near real-time.  
+- **File Gateway Protocols:** Supports **NFS** or **SMB** for compatibility with existing systems.  
+- **Secure and Durable:** Data stored in **S3** benefits from 99.999999999% (11 nines) durability.  
+- **Scalable Architecture:** Easily extend storage capacity without upgrading local hardware.  
+- **Use Cases:** Backup, disaster recovery, hybrid workloads, and data migration.
 
 ---
 
@@ -47,7 +62,7 @@ In this project, we configure **File Gateway** to replicate files from a local L
 ---
 
 ### **4️⃣ Create an S3 Bucket**
-- Go to **Amazon S3** and create a new bucket 
+- Go to **Amazon S3** and create a new private bucket 
 - Keep the bucket **empty** for now
 
 📸 *Screenshot:*  
@@ -81,7 +96,7 @@ In this project, we configure **File Gateway** to replicate files from a local L
 sudo -s
 yum install -y nfs-utils
 mkdir filesystem
-sudo mount -t nfs -o nolock,hard 172.31.29.134:/730pm-sgdemo-bkt filesystem/
+sudo mount -t nfs -o nolock,hard 172.31.47.158:/private-backup-bucket-1 filesystem/
 cd filesystem
 ls
 touch hello.txt
@@ -89,6 +104,16 @@ touch welcome.txt
 ```
 ![mounted](SS/mounted.png)
 
-### **8 Successfully replicated backup on S3 bucket**
+### **8.  Successfully replicated backup on S3 bucket**
 *Screenshot:*
 ![UpdatedBucket](SS/updated-bkt.png)
+
+---
+
+By implementing this project, you will understand:
+- How to deploy and activate a **File Gateway**  
+- How to configure **file shares** linked to **S3 buckets**  
+- How local NFS file operations are automatically synchronized to AWS  
+- The inner working of hybrid cloud replication and caching mechanisms.
+
+
