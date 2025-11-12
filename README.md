@@ -27,6 +27,8 @@ In this project, we configure **File Gateway** to replicate files from a local L
 
 ### **2️⃣ Launch Gateway Appliance**
 - Launch an EC2 instance using the **AWS Storage Gateway AMI**
+- Recommended instance type: **m5.xlarge** (with 80GB root and 150GB additional volume)
+- Ensure **All Traffic** is temporarily allowed in the default Security Group (for setup)
 - Note down the **public IP** of the instance — this will be used to activate the gateway
 
 📸 *Screenshot:*  
@@ -36,7 +38,7 @@ In this project, we configure **File Gateway** to replicate files from a local L
 
 ### **3️⃣ Activate the Gateway**
 - Go to the **Storage Gateway Console** and click **“Activate Gateway”**
-- Enter the private IP of your EC2 appliance
+- Enter the public IP of your EC2 appliance
 - Complete the activation steps
 
 📸 *Screenshot:*  
@@ -75,7 +77,6 @@ In this project, we configure **File Gateway** to replicate files from a local L
 
 ### **7️⃣ Mount File Share on EC2**
 - Connect to your EC2 instance via SSH and run the following commands:
-
 ```bash
 sudo -s
 yum install -y nfs-utils
@@ -86,6 +87,8 @@ ls
 touch hello.txt
 touch welcome.txt
 ```
+![mounted](SS/mounted.png)
+
 ### **8 Successfully replicated backup on S3 bucket**
 *Screenshot:*
 ![UpdatedBucket](SS/updated-bkt.png)
